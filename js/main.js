@@ -166,14 +166,33 @@ function getSubInfo() {
     });
     for (j = 0; j < dataContent.length; j++) {
         console.log(dataContent[j]);
+        var id1 = dataContent[j].key.slice(0, 2);
+        if (all_id.includes(id1)) {
+            sub_userid.push(id1);
+        } else {
+            not_sub_suerid.push(id1);
+        }
     }
+    for (j = 0; j < not_sub_suerid.length; j++) {
+        nameText = nameText + info[not_sub_suerid[j]] + "，";
+    }
+    var modal_body = document.getElementById("modal-body");
+    modal_body.innerText = not_sub_suerid.length + "人未上交截图" + "<br>" + nameText;
+
+
 
 }
 var info = { '34': '付天怡', '39': '汪家伟', '38': '李健', '52': '王梦凡', '37': '何佳荣', '40': '万达', '36': '张得申', '35': '孙博', '44': '吉鹏', '42': '陈冠齐', '43': '覃博文', '51': '向关海', '32': '徐钰馨', '30': '张雨', '53': '王尚杰', '41': '杨龙胥', '54': '纪允涵', '45': '柴国毅', '46': '曲迪一', '49': '齐奥成', '47': '周亢伉', '31': '吴文敏', '55': '应松延', '50': '杨佳峰', '33': '刘露瑶', '56': '姚文哲', '29': '贾茸嵘', '48': '韦俊全' };
 var username = null;
+var all_id = []
+var sub_userid = [];
+var not_sub_suerid = [];
 var config = {
     "region": "ap-nanjing",
     "bucket": "daxuexi-1302938886",
     "SecretId": 'AKID0mLehWGWd0B7mC5UGlRvA8LNCl9L37rI',
     "SecretKey": 'QdMqc9yTyFI9nCON9sOo14uPzOYVDdmj'
+}
+for (let key in info) {
+    all_id.push(key)
 }
