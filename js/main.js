@@ -166,12 +166,19 @@ function getSubInfo() {
 
         for (j = 0; j < dataContent.length; j++) {
             console.log(dataContent[j]);
-            var id1 = dataContent[j].key.slice(0, 2);
-            if (all_id.includes(id1)) {
-                sub_userid.push(id1);
-            } else {
-                not_sub_suerid.push(id1);
+            var id1 = dataContent[j].Key.slice(0, 2);
+            sub_userid.push(id1);
+            // if (all_id.includes(id1)) {
+            //     sub_userid.push(id1);
+            // } else {
+            //     not_sub_suerid.push(id1);
+            // }
+        }
+        for (j = 0; j < sub_userid.length; j++) {
+            if (all_id.includes(sub_userid[j])) {
+                continue;
             }
+            not_sub_suerid.push(sub_userid[j]);
         }
         for (j = 0; j < not_sub_suerid.length; j++) {
             nameText = nameText + info[not_sub_suerid[j]] + "，";
