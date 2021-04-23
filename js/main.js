@@ -10,7 +10,6 @@ function submitall() {
     canvas = ImageToCanvas(pic);
     canvasToImage(canvas);
     upload();
-    alert("提交！");
 }
 
 function upload() {
@@ -42,7 +41,16 @@ async function put(cos) {
         }
     }, function(err, data) {
         console.log(err || data);
+        // alert(typeof(err));
+        if (err != null && data == null) {
+            alert("服务器挂了，提交失败！！！");
+        } else if (err == null && data != null) {
+            alert("提交成功！");
+        }
+        // location.reload();
     });
+    // alert("提交成功!")
+
 }
 
 function getName() {
@@ -140,7 +148,5 @@ function dataURLtoBlob(dataurl) {
     }
     return new Blob([u8arr], { type: mime });
 }
-var info = {
-    "11": "李华"
-};
+var info = { '34': '付天怡', '39': '汪家伟', '38': '李健', '52': '王梦凡', '37': '何佳荣', '40': '万达', '36': '张得申', '35': '孙博', '44': '吉鹏', '42': '陈冠齐', '43': '覃博文', '51': '向关海', '32': '徐钰馨', '30': '张雨', '53': '王尚杰', '41': '杨龙胥', '54': '纪允涵', '45': '柴国毅', '46': '曲迪一', '49': '齐奥成', '47': '周亢伉', '31': '吴文敏', '55': '应松延', '50': '杨佳峰', '33': '刘露瑶', '56': '姚文哲', '29': '贾茸嵘', '48': '韦俊全' };
 var username = null;
