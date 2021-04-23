@@ -158,7 +158,7 @@ function getSubInfo() {
         /* 必须 */
         Region: config.region,
         /* 存储桶所在地域，必须字段 */
-        Prefix: '/',
+        // Prefix: '/',
         /* 非必须 */
     }, function(err, data) {
         console.log(err || data.Contents);
