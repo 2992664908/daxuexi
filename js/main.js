@@ -153,6 +153,7 @@ function getSubInfo() {
     sub_userid = [];
     not_sub_suerid = [];
     var dataContent = {};
+    var cos=getcos();
     nameText = "";
     cos.getBucket({
         Bucket: config.bucket,
