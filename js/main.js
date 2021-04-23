@@ -9,28 +9,28 @@ function submitall() {
     var pic = document.getElementById('picture');
     canvas = ImageToCanvas(pic);
     canvasToImage(canvas);
-    upload();
+    put();
 }
 
-function upload() {
+function getcos() {
     var cos = new COS({
-        SecretId: 'AKID0mLehWGWd0B7mC5UGlRvA8LNCl9L37rI',
-        SecretKey: 'QdMqc9yTyFI9nCON9sOo14uPzOYVDdmj',
+        SecretId: config.SecretId,
+        SecretKey: config.SecretKey,
     });
-    put(cos)
-
+    return cos;
 }
 
-async function put(cos) {
+function put() {
+    var cos = getcos();
     var canvas = document.getElementById("mycanvas");
     var dataurl = canvas.toDataURL('image/png');
     var blob = dataURLtoBlob(dataurl);
 
     var key = document.getElementById("username").value;
     cos.putObject({
-        Bucket: 'daxuexi-1302938886',
+        Bucket: config.bucket,
         /* 必须 */
-        Region: 'ap-nanjing',
+        Region: config.region,
         /* 存储桶所在地域，必须字段 */
         Key: key + ".jpg",
         /* 必须 */
@@ -148,5 +148,32 @@ function dataURLtoBlob(dataurl) {
     }
     return new Blob([u8arr], { type: mime });
 }
+
+function getSubInfo() {
+    var cos = getcos();
+    var dataContent = {};
+    nameText = "";
+    cos.getBucket({
+        Bucket: config.bucket,
+        /* 必须 */
+        Region: config.region,
+        /* 存储桶所在地域，必须字段 */
+        Prefix: '/',
+        /* 非必须 */
+    }, function(err, data) {
+        console.log(err || data.Contents);
+        dataContent = data.Contents;
+    });
+    for (j = 0; j < dataContent.length; j++) {
+        console.log(dataContent[j]);
+    }
+
+}
 var info = { '34': '付天怡', '39': '汪家伟', '38': '李健', '52': '王梦凡', '37': '何佳荣', '40': '万达', '36': '张得申', '35': '孙博', '44': '吉鹏', '42': '陈冠齐', '43': '覃博文', '51': '向关海', '32': '徐钰馨', '30': '张雨', '53': '王尚杰', '41': '杨龙胥', '54': '纪允涵', '45': '柴国毅', '46': '曲迪一', '49': '齐奥成', '47': '周亢伉', '31': '吴文敏', '55': '应松延', '50': '杨佳峰', '33': '刘露瑶', '56': '姚文哲', '29': '贾茸嵘', '48': '韦俊全' };
 var username = null;
+var config = {
+    "region": "ap-nanjing",
+    "bucket": "daxuexi-1302938886",
+    "SecretId": 'AKID0mLehWGWd0B7mC5UGlRvA8LNCl9L37rI',
+    "SecretKey": 'QdMqc9yTyFI9nCON9sOo14uPzOYVDdmj'
+}
