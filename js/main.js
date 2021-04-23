@@ -176,7 +176,7 @@ function getSubInfo() {
     for (j = 0; j < not_sub_suerid.length; j++) {
         nameText = nameText + info[not_sub_suerid[j]] + "，";
     }
-    var modal_body = document.getElementById("modal-body");
+    var modal_body = document.getElementById("modal-body-text");
     modal_body.innerText = not_sub_suerid.length + "人未上交截图" + "<br>" + nameText;
 
 
