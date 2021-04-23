@@ -150,7 +150,8 @@ function dataURLtoBlob(dataurl) {
 }
 
 function getSubInfo() {
-    var cos = getcos();
+    sub_userid = [];
+    not_sub_suerid = [];
     var dataContent = {};
     nameText = "";
     cos.getBucket({
@@ -178,7 +179,7 @@ function getSubInfo() {
             if (sub_userid.includes(all_id[j])) {
                 continue;
             }
-            not_sub_suerid.push(sub_userid[j]);
+            not_sub_suerid.push(all_id[j]);
         }
         for (j = 0; j < not_sub_suerid.length; j++) {
             nameText = nameText + info[not_sub_suerid[j]] + "，";
