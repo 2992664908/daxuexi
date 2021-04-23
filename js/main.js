@@ -174,8 +174,8 @@ function getSubInfo() {
             //     not_sub_suerid.push(id1);
             // }
         }
-        for (j = 0; j < sub_userid.length; j++) {
-            if (all_id.includes(sub_userid[j])) {
+        for (j = 0; j < all_id.length; j++) {
+            if (sub_userid.includes(all_id[j])) {
                 continue;
             }
             not_sub_suerid.push(sub_userid[j]);
