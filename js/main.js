@@ -9,7 +9,40 @@ function submitall() {
     var pic = document.getElementById('picture');
     canvas = ImageToCanvas(pic);
     canvasToImage(canvas);
+    upload();
     alert("提交！");
+}
+
+function upload() {
+    var cos = new COS({
+        SecretId: 'AKID0mLehWGWd0B7mC5UGlRvA8LNCl9L37rI',
+        SecretKey: 'QdMqc9yTyFI9nCON9sOo14uPzOYVDdmj',
+    });
+    put(cos)
+
+}
+
+async function put(cos) {
+    var canvas = document.getElementById("mycanvas");
+    var dataurl = canvas.toDataURL('image/png');
+    var blob = dataURLtoBlob(dataurl);
+
+    var key = document.getElementById("username").value;
+    cos.putObject({
+        Bucket: 'daxuexi-1302938886',
+        /* 必须 */
+        Region: 'ap-nanjing',
+        /* 存储桶所在地域，必须字段 */
+        Key: key + ".jpg",
+        /* 必须 */
+        StorageClass: 'STANDARD',
+        Body: blob, // 上传文件对象
+        onProgress: function(progressData) {
+            console.log(JSON.stringify(progressData));
+        }
+    }, function(err, data) {
+        console.log(err || data);
+    });
 }
 
 function getName() {
@@ -31,7 +64,6 @@ function canvasToImage(canvas) {
     image = document.getElementById("picture");
     image.src = canvas.toDataURL("image/png");
     //在此处也可以使用js的appendChild()方法将此img加入html页面
-
     //return image;
 }
 
@@ -95,6 +127,18 @@ function handleFiles(files) {
         canvas.getContext("2d").drawImage(image, 0, 0); //0, 0参数画布上的坐标点，图片将会拷贝到这个地方
         return canvas;
     }
+}
+
+function dataURLtoBlob(dataurl) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
 }
 var info = {
     "11": "李华"
