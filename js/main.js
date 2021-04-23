@@ -163,21 +163,24 @@ function getSubInfo() {
     }, function(err, data) {
         console.log(err || data.Contents);
         dataContent = data.Contents;
-    });
-    for (j = 0; j < dataContent.length; j++) {
-        console.log(dataContent[j]);
-        var id1 = dataContent[j].key.slice(0, 2);
-        if (all_id.includes(id1)) {
-            sub_userid.push(id1);
-        } else {
-            not_sub_suerid.push(id1);
+
+        for (j = 0; j < dataContent.length; j++) {
+            console.log(dataContent[j]);
+            var id1 = dataContent[j].key.slice(0, 2);
+            if (all_id.includes(id1)) {
+                sub_userid.push(id1);
+            } else {
+                not_sub_suerid.push(id1);
+            }
         }
-    }
-    for (j = 0; j < not_sub_suerid.length; j++) {
-        nameText = nameText + info[not_sub_suerid[j]] + "，";
-    }
-    var modal_body = document.getElementById("modal-body-text");
-    modal_body.innerHTML = not_sub_suerid.length + "人未上交截图" + "<br>" + nameText;
+        for (j = 0; j < not_sub_suerid.length; j++) {
+            nameText = nameText + info[not_sub_suerid[j]] + "，";
+        }
+        var modal_body = document.getElementById("modal-body-text");
+        modal_body.innerHTML = not_sub_suerid.length + "人未上交截图" + "<br>" + nameText;
+    });
+
+
 
 
 
