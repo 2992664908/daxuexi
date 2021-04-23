@@ -1,0 +1,64 @@
+    #pic {
+        margin-top: 30px;
+    }
+    
+    .jumbotron {
+        margin-top: 30px;
+    }
+    
+    #submit {
+        margin-top: 30px;
+        margin-right: 70px;
+        width: 300px;
+    }
+    
+    .form-control {
+        width: 100px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        float: left;
+    }
+    
+    #picture {
+        margin: 2%;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        height: 90%;
+        width: 95%;
+    }
+    
+    .up-file {
+        padding: 4px 10px;
+        height: 34px;
+        width: 80px;
+        float: left;
+        margin-top: 30px;
+        margin-left: 20px;
+        text-align: center;
+        /* line-height: 40px; */
+        position: relative;
+        cursor: pointer;
+        /* color: #FFFFFF; */
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        display: inline-block;
+    }
+    
+    .up-file input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 40px;
+        opacity: 0;
+        font-size: 300px;
+        filter: alpha(opacity=0);
+        cursor: pointer;
+    }
+    
+    #name {
+        /* float: left; */
+        margin-top: 30px;
+        /* margin-left: 10px; */
+        font-size: 20px;
+    }
