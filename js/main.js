@@ -209,6 +209,7 @@ function getSubInfo() {
     not_sub_suerid = [];
     var dataContent = {};
     nameText = "";
+    var cos = getcos();
     cos.getBucket({
         Bucket: config.bucket,
         /* 必须 */
