@@ -75,6 +75,61 @@ function canvasToImage(canvas) {
     //return image;
 }
 
+function zip() {
+    let arr = [];
+    for (let i = 0; i < sub_userid.length; i++) {
+        arr.push("https://daxuexi-1302938886.cos.ap-nanjing.myqcloud.com/" + sub_userid[i] + ".jpg ")
+    }
+    var zip = new JSZip();
+    // 创建images文件夹
+    var imgFolder = zip.folder("images");
+
+    // let arr = ["http://p154oss.oss-cn-szfinance.aliyuncs.com/SCAN/CARCLAIM/INSURANCE/C015105282018805619/0d49d586ad8544efa16ea119d2665b86.jpg?OSSAccessKeyId=LTAIjkNGjBjw2aKn&Expires=1537019034&Signature=WxermpQon3%2F4iliho321e%2F7uuG4%3D",
+    //     "http://p154oss.oss-cn-szfinance.aliyuncs.com/SCAN/CARCLAIM/INSURANCE/C015105282018805619/694cd778800446809f55204ae7320475.jpg?OSSAccessKeyId=LTAIjkNGjBjw2aKn&Expires=1537019034&Signature=K7%2BkVa3LEvsQAQtLLDL7QG0yemE%3D",
+    //     "http://pic.58pic.com/58pic/15/63/07/42Q58PIC42U_1024.jpg",
+    //     "http://pic.58pic.com/58pic/14/14/07/97b58PICEn4_1024.jpg"
+    // ];
+    let flag = 0 //  判断加载了几张图片的标识
+    for (let i = 0; i < arr.length; i++) {
+        getBase64(arr[i]).then(function(base64) {
+            base64 = base64.split('base64,')[1]
+            imgFolder.file(i + '.png', base64, { base64: true })
+            if (flag === arr.length - 1) {
+                zip.generateAsync({ type: "blob" }).then((blob) => {
+                    saveAs(blob, "src.zip")
+                })
+            }
+            flag++
+        }, function(err) {
+            console.log(err); //打印异常信息
+        });
+    }
+
+    function getBase64(img) {
+        function getBase64Image(img, width, height) { //width、height调用时传入具体像素值，控制大小 ,不传则默认图像大小
+            var canvas = document.createElement("canvas");
+            canvas.width = width ? width : img.width;
+            canvas.height = height ? height : img.height;
+
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            var dataURL = canvas.toDataURL();
+            return dataURL;
+        }
+        var image = new Image();
+        image.crossOrigin = '*';
+        image.src = img;
+        var deferred = $.Deferred();
+        if (img) {
+            image.onload = function() {
+                deferred.resolve(getBase64Image(image)); //将base64传给done上传处理
+            }
+            return deferred.promise(); //问题要让onload完成后再return sessionStorage['imgTest']
+        }
+    }
+
+}
+
 function ImageToCanvas(image) {
     var canvas = document.getElementById("mycanvas");
     canvas.width = image.width;
@@ -87,7 +142,7 @@ function ImageToCanvas(image) {
     ctx.fillStyle = pattern;
 
     ctx.moveTo(0, 0);  
-    ctx.fillStyle = "black";         //设置填充颜色为紫色
+    ctx.fillStyle = "white";         //设置填充颜色为紫色
       
     ctx.font = '40px "微软雅黑"';       //设置字体
       
@@ -153,7 +208,6 @@ function getSubInfo() {
     sub_userid = [];
     not_sub_suerid = [];
     var dataContent = {};
-    var cos=getcos();
     nameText = "";
     cos.getBucket({
         Bucket: config.bucket,
