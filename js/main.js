@@ -78,7 +78,7 @@ function canvasToImage(canvas) {
 function zip() {
     let arr = [];
     for (let i = 0; i < sub_userid.length; i++) {
-        arr.push("https://daxuexi-1302938886.cos.ap-nanjing.myqcloud.com/" + sub_userid[i] + ".jpg ")
+        arr.push("	https://daxuexi-1305730527.cos.ap-nanjing.myqcloud.com/" + sub_userid[i] + ".jpg ")
     }
     var zip = new JSZip();
     // 创建images文件夹
@@ -153,7 +153,7 @@ function ImageToCanvas(image) {
         alert('学号未填写或者不正确');
         return;
     }
-    ctx.fillText(username, 50, 100);
+//     ctx.fillText(username, 50, 100);
     return canvas;
 }
 
